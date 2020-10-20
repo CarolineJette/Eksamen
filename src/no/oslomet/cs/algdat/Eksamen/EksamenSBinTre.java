@@ -1,5 +1,5 @@
 package no.oslomet.cs.algdat.Eksamen;
-
+/*Tester git*/
 
 import java.util.ArrayList;
 import java.util.Comparator;
