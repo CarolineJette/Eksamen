@@ -1,12 +1,9 @@
 package no.oslomet.cs.algdat.Eksamen;
-/*Tester git*/
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class EksamenSBinTre<T> {
+    //SKAL IKKE ENDRES
     private static final class Node<T>   // en indre nodeklasse
     {
         private T verdi;                   // nodens verdi
@@ -39,6 +36,7 @@ public class EksamenSBinTre<T> {
 
     private final Comparator<? super T> comp;       // komparator
 
+    //SKAL IKKE ENDRES
     public EksamenSBinTre(Comparator<? super T> c)    // konstruktør
     {
         rot = null;
@@ -46,6 +44,7 @@ public class EksamenSBinTre<T> {
         comp = c;
     }
 
+    //SKAL IKKE ENDRES
     public boolean inneholder(T verdi) {
         if (verdi == null) return false;
 
@@ -61,10 +60,12 @@ public class EksamenSBinTre<T> {
         return false;
     }
 
+    //SKAL IKKE ENDRES
     public int antall() {
         return antall;
     }
 
+    //SKAL IKKE ENDRES
     public String toStringPostOrder() {
         if (tom()) return "[]";
 
@@ -79,57 +80,91 @@ public class EksamenSBinTre<T> {
         return s.toString();
     }
 
+    //SKAL IKKE ENDRES
     public boolean tom() {
         return antall == 0;
     }
 
+    // OPPGAVE 1
+    //Kopiert inn Programkode 5.2.3 a)
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+
+        Node<T> p = rot, q = null;               // p starter i roten
+        int cmp = 0;                             // hjelpevariabel
+
+        while (p != null)       // fortsetter til p er ute av treet
+        {
+            q = p;                                 // q er forelder til p
+            cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
+            p = cmp < 0 ? p.venstre : p.høyre;     // flytter p
+        }
+
+        // p er nå null, dvs. ute av treet, q er den siste vi passerte
+
+        p = new Node<>(verdi);                   // oppretter en ny node
+
+        if (q == null) rot = p;                  // p blir rotnode
+        else if (cmp < 0) q.venstre = p;         // venstre barn til q
+        else q.høyre = p;                        // høyre barn til q
+
+        antall++;                                // én verdi mer i treet
+        return true;                             // vellykket innlegging
     }
 
+    // OPPGAVE 6A
     public boolean fjern(T verdi) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 6B
     public int fjernAlle(T verdi) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 2
     public int antall(T verdi) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 6C
     public void nullstill() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 3A
     private static <T> Node<T> førstePostorden(Node<T> p) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 3B
     private static <T> Node<T> nestePostorden(Node<T> p) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 4A
     public void postorden(Oppgave<? super T> oppgave) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    //SKAL IKKE ENDRES
     public void postordenRecursive(Oppgave<? super T> oppgave) {
         postordenRecursive(rot, oppgave);
     }
 
+    // OPPGAVE 4B
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 5A
     public ArrayList<T> serialize() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    // OPPGAVE 5B
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
-
 
 } // ObligSBinTre
