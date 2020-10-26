@@ -174,7 +174,7 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
         //Sjekker om p sin forelder er null, da er i så fall p den siste i postorden
-        if(p.forelder != null){
+        if(p.forelder == null){
             return null;
         }
 
