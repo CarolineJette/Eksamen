@@ -161,12 +161,36 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 3A
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if(p.venstre != null){
+            førstePostorden(p.venstre);
+        }
+        if(p.høyre != null){
+            førstePostorden(p.høyre);
+        }
+        return p;
     }
 
     // OPPGAVE 3B
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        //Sjekker om p sin forelder er null, da er i så fall p den siste i postorden
+        if(p.forelder != null){
+            return null;
+        }
+
+        Node<T> forelder = p.forelder;
+        //Hvis høyre barn av foreldre er lik p eller høyre barn til p sin forelder,
+        // er null er forelder neste i postorden
+        if(forelder.høyre == p || forelder.høyre == null){
+            return forelder;
+        }
+
+        //I alle andre tilfeller er neste i postorden noden lengst til venstre i subtreet til p sitt høyre søsken
+        Node<T> current = forelder.høyre;
+        while(current.venstre != null){
+            current = current.venstre;
+        }
+        return current;
     }
 
     // OPPGAVE 4A
