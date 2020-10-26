@@ -132,21 +132,26 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 2
     public int antall(T verdi) {
-        //hvis treet er tomt skal funksjonen returnere 0
-        if(tom()){
+        //hvis verdien er null returnerer funksjonen 0, fordi null ikke finnes i treet
+        if(verdi == null){
             return 0;
         }
 
+        Node<T> p = rot;                        // p starter i roten
+        int cmp;
+
         //teller for antall ganger verdien er i treet
-        int verdiantall = 0;
+        int teller = 0;
 
-        //kaller på inneholder()-metoden, hvis den returnerer true økes verdiantall med 1
-        if(inneholder(verdi)){
-            verdiantall++;
+        while (p != null)                           // traverserer gjennom treet
+        {
+            if(verdi == p.verdi){
+                teller++;
+            }
+            cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
+            p = cmp < 0 ? p.venstre : p.høyre;
         }
-
-        //returnerer antall av verdien sendt inn
-        return verdiantall;
+        return teller;
     }
 
     // OPPGAVE 6C
