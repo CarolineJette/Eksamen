@@ -86,11 +86,12 @@ public class EksamenSBinTre<T> {
     }
 
     // OPPGAVE 1
-    //Kopiert inn Programkode 5.2.3 a)
+    //Kopiert inn Programkode 5.2.3 a) fra kompendiet, gjort endringer for at den skal passere testen
     public boolean leggInn(T verdi) {
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
-        Node<T> p = rot, q = null;               // p starter i roten
+        Node<T> p = rot;                        // p starter i roten
+        Node<T> q = null;
         int cmp = 0;                             // hjelpevariabel
 
         while (p != null)       // fortsetter til p er ute av treet
@@ -102,13 +103,20 @@ public class EksamenSBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<>(verdi);                   // oppretter en ny node
+        p = new Node<>(verdi, q);                   // oppretter en ny node med verdi som verdi og p som forelder
 
-        if (q == null) rot = p;                  // p blir rotnode
-        else if (cmp < 0) q.venstre = p;         // venstre barn til q
-        else q.høyre = p;                        // høyre barn til q
+        if (q == null){
+            rot = p;                                // p blir rotnode
+        }
+        else if (cmp < 0){
+            q.venstre = p;                          // venstre barn til q
+        }
+        else{
+            q.høyre = p;                            // høyre barn til q
+        }
 
         antall++;                                // én verdi mer i treet
+        endringer++;                             // antall endringer øker med en
         return true;                             // vellykket innlegging
     }
 
