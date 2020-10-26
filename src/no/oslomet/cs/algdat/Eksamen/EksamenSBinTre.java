@@ -132,7 +132,21 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 2
     public int antall(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //hvis treet er tomt skal funksjonen returnere 0
+        if(tom()){
+            return 0;
+        }
+
+        //teller for antall ganger verdien er i treet
+        int verdiantall = 0;
+
+        //kaller på inneholder()-metoden, hvis den returnerer true økes verdiantall med 1
+        if(inneholder(verdi)){
+            verdiantall++;
+        }
+
+        //returnerer antall av verdien sendt inn
+        return verdiantall;
     }
 
     // OPPGAVE 6C
