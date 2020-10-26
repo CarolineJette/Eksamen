@@ -161,18 +161,29 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 3A
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        if(p.venstre != null){
+        /*if(p.venstre != null){
             førstePostorden(p.venstre);
         }
         if(p.høyre != null){
             førstePostorden(p.høyre);
         }
-        return p;
+        return p;*/
+        while (true)
+        {
+            if (p.venstre != null){
+                p = p.venstre;
+            }
+            else if (p.høyre != null){
+                p = p.høyre;
+            }
+            else{
+                return p;
+            }
+        }
     }
 
     // OPPGAVE 3B
     private static <T> Node<T> nestePostorden(Node<T> p) {
-
         //Sjekker om p sin forelder er null, da er i så fall p den siste i postorden
         if(p.forelder == null){
             return null;
@@ -187,8 +198,11 @@ public class EksamenSBinTre<T> {
 
         //I alle andre tilfeller er neste i postorden noden lengst til venstre i subtreet til p sitt høyre søsken
         Node<T> current = forelder.høyre;
-        while(current.venstre != null){
-            current = current.venstre;
+        while(current.venstre != null || current.høyre != null){
+            while(current.venstre != null){
+                current = current.venstre;
+            }
+            current = current.høyre;
         }
         return current;
     }
