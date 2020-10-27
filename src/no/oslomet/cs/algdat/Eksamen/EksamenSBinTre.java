@@ -161,21 +161,18 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 3A
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        /*if(p.venstre != null){
-            førstePostorden(p.venstre);
-        }
-        if(p.høyre != null){
-            førstePostorden(p.høyre);
-        }
-        return p;*/
-        while (true)
-        {
+        //Kode kopiert fra Programkode 5.1.7 h) i kompendiet
+        //Løkken skal kjøres så lenge den er true (som er hele tiden), frem til p returneres og vi bryter ut av løkken
+        while (true) {
+            //Hvis p har et venstre barn settes p til dette barnet og løkken kjører igjen
             if (p.venstre != null){
                 p = p.venstre;
             }
+            //Hvis p ikke har et venstre men et høyre barn settes p til dette barnet og løkken kjører igjen
             else if (p.høyre != null){
                 p = p.høyre;
             }
+            //Hvis p ikke har noen barn har vi funnet første i postordre og returnerer p
             else{
                 return p;
             }
@@ -184,27 +181,37 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 3B
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        //Sjekker om p sin forelder er null, da er i så fall p den siste i postorden
+        Node<T> current; //hjelpenode
+
+        //Hvis p sin forelder er null er dette siste i postorden
         if(p.forelder == null){
             return null;
         }
-
-        Node<T> forelder = p.forelder;
-        //Hvis høyre barn av foreldre er lik p eller høyre barn til p sin forelder,
-        // er null er forelder neste i postorden
-        if(forelder.høyre == p || forelder.høyre == null){
-            return forelder;
-        }
-
-        //I alle andre tilfeller er neste i postorden noden lengst til venstre i subtreet til p sitt høyre søsken
-        Node<T> current = forelder.høyre;
-        while(current.venstre != null || current.høyre != null){
-            while(current.venstre != null){
-                current = current.venstre;
+        else{
+            //Hvis p ikke har et høyre søsken eller selv er høyre barn er neste i postorden p sin forelder
+            if(p.forelder.høyre == null || p.forelder.høyre == p){
+                return p.forelder;
             }
-            current = current.høyre;
+            else{
+                //Hvis p har et høyre søsken og selv ikke er høyre barn blir hjelpenoden satt til høyre søsken
+                current = p.forelder.høyre;
+
+                //Så lenge current har minst ett barn går den inn i while-løkken (testen passerer uten denne løkken,
+                // men det hadde ikke fungert hvis f.eks. 4 (i a i oppgave3()) hadde hatt et høyre barn som igjen hadde
+                // hatt et venstre barn)
+                while(current.venstre != null || current.høyre != null){
+                    //Setter current til current sitt venstre barn så lenge det ikke er null
+                    while(current.venstre != null){
+                        current = current.venstre;
+                    }
+                    //Setter current til current sitt høyre barn så lenge det ikke er null
+                    while(current.høyre != null){
+                        current = current.høyre;
+                    }
+                }
+                return current;
+            }
         }
-        return current;
     }
 
     // OPPGAVE 4A
