@@ -216,7 +216,17 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 4A
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> p;
+        //Setter p til første i postorden og utfører oppgave med p sin verdi
+        p = førstePostorden(rot);
+        oppgave.utførOppgave(p.verdi);
+
+        //Traverserer gjennom treet ved å bruke nestePostorden() så lenge neste i postorden ikke er null,
+        // og utføre oppgave på verdien til hver node p
+        while(nestePostorden(p) != null){
+            p = nestePostorden(p);
+            oppgave.utførOppgave(p.verdi);
+        }
     }
 
     //SKAL IKKE ENDRES
