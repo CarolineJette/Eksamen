@@ -236,7 +236,16 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 4B
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Går rekursivt til venstre helt til p sitt venstre barn er null
+        if(p.venstre != null){
+            postordenRecursive(p.venstre, oppgave);
+        }
+        //Hvis p sitt venstre barn er null, gå til høyre, gjør et rekursivt kall på funksjonen og starter fra toppen
+        if(p.høyre != null){
+            postordenRecursive(p.høyre, oppgave);
+        }
+        //Utfør oppgave på verdien til p
+        oppgave.utførOppgave(p.verdi);
     }
 
     // OPPGAVE 5A
