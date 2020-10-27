@@ -217,15 +217,14 @@ public class EksamenSBinTre<T> {
     // OPPGAVE 4A
     public void postorden(Oppgave<? super T> oppgave) {
         Node<T> p;
-        //Setter p til første i postorden og utfører oppgave med p sin verdi
+        //Setter p til første i postorden
         p = førstePostorden(rot);
-        oppgave.utførOppgave(p.verdi);
 
-        //Traverserer gjennom treet ved å bruke nestePostorden() så lenge neste i postorden ikke er null,
-        // og utføre oppgave på verdien til hver node p
-        while(nestePostorden(p) != null){
-            p = nestePostorden(p);
+        //Traverserer gjennom treet ved å bruke nestePostorden() så lenge p ikke er null,
+        // og utfører oppgave på verdien til hver node p
+        while(p != null){
             oppgave.utførOppgave(p.verdi);
+            p = nestePostorden(p);
         }
     }
 
@@ -250,7 +249,8 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 5A
     public ArrayList<T> serialize() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        ArrayList<T> liste = new ArrayList<>();
+        return liste;
     }
 
     // OPPGAVE 5B
