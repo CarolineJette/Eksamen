@@ -249,7 +249,30 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 5A
     public ArrayList<T> serialize() {
+        //Lager en kø
+        ArrayDeque<Node> kø = new ArrayDeque<Node>();
+
+        //Lager en liste som skal fylles med verdier og returneres
         ArrayList<T> liste = new ArrayList<>();
+
+        //Initialiserer køen
+        kø.addLast(rot);
+
+        while(!kø.isEmpty()){
+            //Tar ut første fra køen
+            Node<T> current = kø.removeFirst();
+
+            //Legger til current sine to barn til køen
+            if(current.venstre != null){
+                kø.addLast(current.venstre);
+            }
+            if(current.høyre != null){
+                kø.addLast(current.høyre);
+            }
+
+            //Legger til current sin verdi i liste
+            liste.add(current.verdi);
+        }
         return liste;
     }
 
