@@ -249,7 +249,7 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 5A
     public ArrayList<T> serialize() {
-        //Lager en kø
+        //Lager en hjelpekø
         ArrayDeque<Node> kø = new ArrayDeque<Node>();
 
         //Lager en liste som skal fylles med verdier og returneres
@@ -273,12 +273,24 @@ public class EksamenSBinTre<T> {
             //Legger til current sin verdi i liste
             liste.add(current.verdi);
         }
+        //Returnerer en liste med verdier i Nivåorden
         return liste;
     }
 
     // OPPGAVE 5B
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Oppretter et tre av klassen EksamensSBinTre som skal returneres
+        EksamenSBinTre<K> tre = new EksamenSBinTre<K>(c);
+        //Hvis arrayet som sendes inn er tomt returneres et tomt tre
+        if(data.size() == 0){
+            return tre;
+        }
+        //Løper gjennom arrayet og kaller på leggInn()-metoden fra Oppgave 1 til å legge inn en og en verdi i treet
+        for(K verdi : data){
+            tre.leggInn(verdi);
+        }
+        //Returnerer et binært søketre med verdiene i arrayet som ble sendt inn i Nivåorden
+        return tre;
     }
 
 } // ObligSBinTre
