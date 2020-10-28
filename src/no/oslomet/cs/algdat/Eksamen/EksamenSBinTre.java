@@ -122,7 +122,99 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 6A
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Kopiert inn Programkode 5.2.8 d) fra kompendiet, gjort endringer for at forelder får korrekt verdi
+        //Hvis verdi er null returnerer metoden false da treet ikke har noen nullverdier
+        if (verdi == null){
+            return false;
+        }
+
+        Node<T> p = rot;
+        Node<T> q = null;   // q skal være forelder til p
+
+        //Leter etter verdi i treet
+        while (p != null){
+            int cmp = comp.compare(verdi,p.verdi);      // sammenligner verdi og p sin verdi
+            if (cmp < 0){
+                q = p;
+                p = p.venstre; // går til venstre
+            }
+            else if (cmp > 0){
+                q = p;
+                p = p.høyre; // går til høyre
+            }
+            else{
+                break;    // den søkte verdien ligger i p
+            }
+        }
+
+        //Hvis p har blitt null (eller treet allerede er tomt) har ikke verdien blitt funnet i treet og metoden
+        // returnerer false
+        if (p == null){
+            return false;
+        }
+
+        // Tilfelle 1) p har ingen barn og 2) p har ett barn
+        if (p.venstre == null || p.høyre == null) {
+
+            //En hjelpenode b som peker på p sitt venstre barn om det ikke er null og høyre barn om det er null
+            Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
+
+            //Hvis p er roten i treet fjernes p ved at roten settes til å være b
+            if (p == rot){
+                rot = b;
+            }
+
+            //Hvis p er venstrebarnet til q
+            else if(p == q.venstre){
+                //q sitt venstre barn settes til b
+                q.venstre = b;
+                //Så lenge b ikke er null settes b sin forelder til q
+                if(b != null){
+                    b.forelder = q;
+                }
+            }
+
+            //Hvis p er høyrebarnet til q
+            else{
+                //q sitt høyre barn settes til b
+                q.høyre = b;
+                //Så lenge b ikke er null settes b sin forelder til q
+                if(b != null){
+                    b.forelder = q;
+                }
+            }
+        }
+
+        // Tilfelle 3) p har to barn
+        else {
+            //Oppretter to hjelpenoder s og r for å finne neste i inorden
+            Node<T> s = p;
+            Node<T> r = p.høyre;
+
+            // Finner neste i inorden
+            while (r.venstre != null)
+            {
+                s = r;    // s er forelder til r
+                r = r.venstre;
+            }
+            //Kopierer verdien i r til p
+            p.verdi = r.verdi;
+
+            //Hvis s og p ikke er like blir s sitt venstre barn satt til r sitt høyre
+            if (s != p){
+                s.venstre = r.høyre;
+            }
+            //Hvis s og p er like blir s sitt høyre barn satt til r sitt høyre barn
+            else{
+                s.høyre = r.høyre;
+            }
+        }
+
+        antall--;   // det er nå én node mindre i treet
+        endringer++; //det er gjort en endring i treet
+
+        //Fjerning av verdien er vellykket og metoden returnerer true
+        return true;
     }
 
     // OPPGAVE 6B
