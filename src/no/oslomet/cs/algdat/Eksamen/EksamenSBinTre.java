@@ -259,7 +259,11 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 6C
     public void nullstill() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> p = rot;
+        while(p != null){
+            fjernAlle(p.verdi);
+            p = nestePostorden(p);
+        }
     }
 
     // OPPGAVE 3A
