@@ -224,10 +224,11 @@ public class EksamenSBinTre<T> {
             return 0;
         }
         int antallFjernet = 0;
-        while(fjern(verdi) != false){
-            fjern(verdi);
+        while(fjern(verdi)){
             antallFjernet++;
         }
+        antall -= antallFjernet;
+        endringer += antallFjernet;
         return antallFjernet;
     }
 
