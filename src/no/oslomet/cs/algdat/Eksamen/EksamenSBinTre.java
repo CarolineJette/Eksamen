@@ -242,7 +242,7 @@ public class EksamenSBinTre<T> {
     // OPPGAVE 2
     public int antall(T verdi) {
         //Hvis verdien er null returnerer funksjonen 0, fordi null ikke finnes i treet
-        if(verdi == null){
+        if(verdi == null || tom()){
             return 0;
         }
 
@@ -253,7 +253,7 @@ public class EksamenSBinTre<T> {
         //Teller for antall ganger verdien er i treet
         int teller = 0;
 
-        //Traverserer gjennom treet
+        //Går nedover i treet til p er null
         while (p != null){
             //Hvis verdi er funnet i treet øker teller med 1
             if(verdi == p.verdi){
