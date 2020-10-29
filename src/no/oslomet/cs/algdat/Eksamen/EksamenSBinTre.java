@@ -159,9 +159,12 @@ public class EksamenSBinTre<T> {
             //En hjelpenode b som peker på p sitt venstre barn om det ikke er null og høyre barn om det er null
             Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
 
-            //Hvis p er roten i treet fjernes p ved at roten settes til å være b
+            //Hvis p er roten i treet fjernes p ved at roten settes til å være b og b sin forelder til å være null
             if (p == rot){
                 rot = b;
+                if(b != null){
+                    b.forelder = null;
+                }
             }
 
             //Hvis p er venstrebarnet til q
