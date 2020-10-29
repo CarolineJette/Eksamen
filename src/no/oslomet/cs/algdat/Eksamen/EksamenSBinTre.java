@@ -259,7 +259,14 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 6C
     public void nullstill() {
-        Node<T> p = rot;
+        //Hvis treet er tomt gjør ikke metoden noen ting
+        if(rot == null){
+            return;
+        }
+        //Oppretter en hjelpenode p som settes til første i postorden
+        Node<T> p = førstePostorden(rot);
+        //Traverserer gjennom treet i postorden ved hjelp av nestePostorden() og kaller på fjernAlle()-metoden for
+        // å fjerne nodene samt duplikatene
         while(p != null){
             fjernAlle(p.verdi);
             p = nestePostorden(p);
