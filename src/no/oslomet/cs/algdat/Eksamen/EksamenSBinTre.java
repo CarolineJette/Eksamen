@@ -230,8 +230,6 @@ public class EksamenSBinTre<T> {
         while(fjern(verdi)){
             antallFjernet++;
         }
-        antall -= antallFjernet;
-        endringer += antallFjernet;
         return antallFjernet;
     }
 
