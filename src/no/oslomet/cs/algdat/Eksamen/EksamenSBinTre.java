@@ -261,7 +261,7 @@ public class EksamenSBinTre<T> {
             }
             //Bruker komparatoren, hvis verdi er mindre enn p sin verdi blir p satt til p sitt venstre barn,
             // og hvis verdiene er like eller verdi er større enn p sin verdi blir p satt til p sitt høyre barn
-            cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
+            cmp = comp.compare(verdi,p.verdi);
             p = cmp < 0 ? p.venstre : p.høyre;
         }
         return teller;
