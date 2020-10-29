@@ -1,7 +1,7 @@
 # Mappeeksamen i Algoritmer og Datastrukturer Høst 2020
 
 # Beskrivelse av oppgaveløsning
-Totalt antall commits:
+Totalt antall commits: 29
 
 * Oppgave 1: 
 Løste ved å kopiere Programkode 5.2.3 a) fra kompendiet. La til foreldrepeker og endringsteller. 
