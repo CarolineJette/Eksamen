@@ -226,31 +226,41 @@ public class EksamenSBinTre<T> {
         if(verdi == null || tom()){
             return 0;
         }
+
+        //Teller antall noder med verdien verdi fjernet
         int antallFjernet = 0;
+
+        //Kaller på fjern()-metoden, og så lenge den er vellykket øker telleren med 1
         while(fjern(verdi)){
             antallFjernet++;
         }
+
+        //Returnerer antall noder med verdien verdi som er fjernet
         return antallFjernet;
     }
 
     // OPPGAVE 2
     public int antall(T verdi) {
-        //hvis verdien er null returnerer funksjonen 0, fordi null ikke finnes i treet
+        //Hvis verdien er null returnerer funksjonen 0, fordi null ikke finnes i treet
         if(verdi == null){
             return 0;
         }
 
-        Node<T> p = rot;                        // p starter i roten
+        //Hjelpenode som starter som treet sin rot
+        Node<T> p = rot;
         int cmp;
 
-        //teller for antall ganger verdien er i treet
+        //Teller for antall ganger verdien er i treet
         int teller = 0;
 
-        while (p != null)                           // traverserer gjennom treet
-        {
+        //Traverserer gjennom treet
+        while (p != null){
+            //Hvis verdi er funnet i treet øker teller med 1
             if(verdi == p.verdi){
                 teller++;
             }
+            //Bruker komparatoren, hvis verdi er mindre enn p sin verdi blir p satt til p sitt venstre barn,
+            // og hvis verdiene er like eller verdi er større enn p sin verdi blir p satt til p sitt høyre barn
             cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
             p = cmp < 0 ? p.venstre : p.høyre;
         }
