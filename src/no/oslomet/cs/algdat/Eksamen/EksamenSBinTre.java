@@ -219,7 +219,16 @@ public class EksamenSBinTre<T> {
 
     // OPPGAVE 6B
     public int fjernAlle(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Returnerer 0 hvis verdi er null, da null ikke finnes i treet, og hvis treet er tomt
+        if(verdi == null || tom()){
+            return 0;
+        }
+        int antallFjernet = 0;
+        while(fjern(verdi) != false){
+            fjern(verdi);
+            antallFjernet++;
+        }
+        return antallFjernet;
     }
 
     // OPPGAVE 2
